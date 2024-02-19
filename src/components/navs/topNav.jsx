@@ -7,10 +7,12 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
+import Link from 'next/link';
 
 const TopNav=()=> {
-    const router=useRouter()
+    const router = useRouter();
+
     const handleRedirect=(route)=>()=>{
         router.push(route)
     }
@@ -28,9 +30,11 @@ const TopNav=()=> {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            News
+            <Link href={"/"} style={{color:"white", textDecoration:"none"}}>
+            E-Library
+            </Link>
           </Typography>
-          <Button color="inherit" onClick={()=>handleRedirect("/login")}>Login</Button>
+          <Button color="inherit" onClick={handleRedirect("/login")}>Login</Button>
         </Toolbar>
       </AppBar>
     </Box>

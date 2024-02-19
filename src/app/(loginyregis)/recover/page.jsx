@@ -1,11 +1,10 @@
+import PasswordResetForm from "@/components/forms/RecoverForm";
 import React from "react";
 
 const RecoverPassword = () => {
   return (
     <>
-      <h1>
-        RECOVER PASSWORD
-      </h1>
+     <PasswordResetForm/>
     </>
   );
 };

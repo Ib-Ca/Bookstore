@@ -1,11 +1,10 @@
+import RegisterForm from "@/components/forms/RegisterForm";
 import React from "react";
 
 const Register = () => {
   return (
     <>
-      <h1>
-        REGISTER
-      </h1>
+    <RegisterForm/>
     </>
   );
 };
