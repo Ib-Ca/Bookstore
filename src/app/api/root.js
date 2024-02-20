@@ -139,3 +139,17 @@ export function getLibrobyId(id) {
       }
   });
 }
+/*Editar libro*/
+export function edit(data) {
+  return new Promise(async (resolve, reject) => {
+      try {
+          const response = await axios.put(`${process.env.REACT_APP_API_DOMAIN}/book/${data.id}`, data,{ withCredentials: true });
+          const result = await response.data;
+          resolve(result);
+      } catch (error) {
+          console.log(error);
+          reject(error);
+      }
+  });
+}
+

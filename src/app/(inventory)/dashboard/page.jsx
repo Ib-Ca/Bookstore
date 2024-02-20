@@ -31,13 +31,9 @@ const Inventario = () => {
     fetchData();
   }, []);
 
-  const handleEdit = (aux) => {
-    console.log(aux);
 
-
-  };
   const handleDelete = (aux) => {
-    console.log(aux);
+    console.log(aux.id);
   };
   const columns = [
     { field: "_id", headerName: "ID", width: 1 },

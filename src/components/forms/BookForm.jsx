@@ -42,6 +42,7 @@ export default function BookForm() {
     console.log(data);
     try {
       const result = await create(data);
+      window.location.href = "/dashboard"///RECARGAAAAAA
     } catch (error) {
       console.log(error);
     }

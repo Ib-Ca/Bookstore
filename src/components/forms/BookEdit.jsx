@@ -1,9 +1,11 @@
-'use client'
+"use client";
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import { Grid, InputLabel, MenuItem, Select } from "@mui/material";
+import { edit } from "@/app/api/root";
+import { useParams, useRouter } from "next/navigation";
 
 export default function BookEdit(
   tituloInitial = "",
@@ -18,23 +20,24 @@ export default function BookEdit(
   image_urlInitial = "",
   disponibilidadInitial = "En Stock"
 ) {
-  const initialValues = {
-    title: tituloInitial,
-    author: autorInitial,
-    isbn: isbnInitial,
-    genre: generoInitial,
-    publisher: editorialInitial,
-    year: anioPublicacionInitial,
-    pages: numeroPaginasInitial,
-    cantidad: cantidadDisponibleInitial,
-    availability: disponibilidadInitial,
-    url: image_urlInitial,
-    synopsis: sinopsisInitial,
-  };
-  console.log(initialValues);
-  const [formValues, setFormValues] = useState(initialValues);
+    const {id}=useParams()
+   // console.log(id);
+  const [formValues, setFormValues] = useState({
+    titulo: tituloInitial.tituloInitial,
+    autor: tituloInitial.autorInitial,
+    isbn: tituloInitial.isbnInitial,
+    genero: tituloInitial.generoInitial,
+    editorial: tituloInitial.editorialInitial,
+    anioPublicacion: tituloInitial.anioPublicacionInitial,
+    numeroPaginas: tituloInitial.numeroPaginasInitial,
+    cantidadDisponible: tituloInitial.cantidadDisponibleInitial,
+    disponibilidad: tituloInitial.disponibilidadInitial,
+    image_url: tituloInitial.image_urlInitial,
+    sinopsis: tituloInitial.sinopsisInitial,
+  });
+ // console.log(tituloInitial);
   const [availability, setAvailability] = React.useState("En Stock");
-
+  const router = useRouter();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -51,10 +54,13 @@ export default function BookEdit(
       cantidadDisponible: formData.get("cantidad"),
       image_url: formData.get("url"),
       disponibilidad: availability,
+      id:id
     };
-    console.log(data);
+    //console.log(data);
     try {
-      // Lógica para crear el libro (puedes llamar a tu función 'create' aquí)
+      const result=await edit(data)
+     // window.location.href = "/dashboard"///RECARGAAAAAA
+     router.push("/dashboard")
     } catch (error) {
       console.log(error);
     }
@@ -70,9 +76,12 @@ export default function BookEdit(
             id="title"
             label="Título del Libro"
             name="title"
-            value={formValues.title}
+            value={formValues.titulo}
             onChange={(e) =>
-              setFormValues({ ...formValues, title: e.target.value })
+              setFormValues({
+                ...formValues,
+                titulo: e.target.value,
+              })
             }
           />
         </Grid>
@@ -83,9 +92,12 @@ export default function BookEdit(
             id="author"
             label="Autor"
             name="author"
-            value={formValues.author}
+            value={formValues.autor}
             onChange={(e) =>
-              setFormValues({ ...formValues, author: e.target.value })
+              setFormValues({
+                ...formValues,
+                autor: e.target.value,
+              })
             }
           />
         </Grid>
@@ -109,9 +121,9 @@ export default function BookEdit(
             id="genre"
             label="Género"
             name="genre"
-            value={formValues.genre}
+            value={formValues.genero}
             onChange={(e) =>
-              setFormValues({ ...formValues, genre: e.target.value })
+              setFormValues({ ...formValues, genero: e.target.value })
             }
           />
         </Grid>
@@ -122,9 +134,9 @@ export default function BookEdit(
             id="publisher"
             label="Editorial"
             name="publisher"
-            value={formValues.publisher}
+               value={formValues.editorial}
             onChange={(e) =>
-              setFormValues({ ...formValues, publisher: e.target.value })
+              setFormValues({ ...formValues, editorial: e.target.value })
             }
           />
         </Grid>
@@ -136,9 +148,9 @@ export default function BookEdit(
             label="Año"
             name="year"
             type="number"
-            value={formValues.year}
+              value={formValues.anioPublicacion}
             onChange={(e) =>
-              setFormValues({ ...formValues, year: e.target.value })
+              setFormValues({ ...formValues, anioPublicacion: e.target.value })
             }
           />
         </Grid>
@@ -150,9 +162,9 @@ export default function BookEdit(
             label="Número de Páginas"
             name="pages"
             type="number"
-            value={formValues.pages}
+               value={formValues.numeroPaginas}
             onChange={(e) =>
-              setFormValues({ ...formValues, pages: e.target.value })
+              setFormValues({ ...formValues, numeroPaginas: e.target.value })
             }
           />
         </Grid>
@@ -164,20 +176,20 @@ export default function BookEdit(
             label="Cantidad"
             name="cantidad"
             type="number"
-            value={formValues.cantidad}
+                 value={formValues.cantidadDisponible}
             onChange={(e) =>
-              setFormValues({ ...formValues, cantidad: e.target.value })
+              setFormValues({ ...formValues, cantidadDisponible: e.target.value })
             }
           />
         </Grid>
         <Grid item xs={12} sm={6}>
           <Select
             id="availability"
-            value={formValues.availability}
             label="Disponibilidad"
             fullWidth
+                value={formValues.disponibilidad}
             onChange={(e) =>
-              setFormValues({ ...formValues, availability: e.target.value })
+              setFormValues({ ...formValues, disponibilidad: e.target.value })
             }
           >
             <MenuItem value="En Stock">En Stock</MenuItem>
@@ -193,9 +205,9 @@ export default function BookEdit(
             id="url"
             label="URL imagen"
             name="url"
-            value={formValues.url}
+                value={formValues.image_url}
             onChange={(e) =>
-              setFormValues({ ...formValues, url: e.target.value })
+              setFormValues({ ...formValues, image_url: e.target.value })
             }
           />
         </Grid>
@@ -208,9 +220,9 @@ export default function BookEdit(
             name="synopsis"
             multiline
             rows={4}
-            value={formValues.synopsis}
+                 value={formValues.sinopsis}
             onChange={(e) =>
-              setFormValues({ ...formValues, synopsis: e.target.value })
+              setFormValues({ ...formValues, sinopsis: e.target.value })
             }
           />
         </Grid>
