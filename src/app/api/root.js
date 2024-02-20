@@ -18,6 +18,23 @@ export function login(data) {
   });
 }
 
+/*Cerrar sesión */
+export function logout() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.delete(
+        `${process.env.REACT_APP_API_DOMAIN}/session`,
+        { withCredentials: true }
+      );
+      const result = await response.data;
+      resolve(result);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+}
+
 /*Registrar usuario */
 export function register(data) {
   return new Promise(async (resolve, reject) => {
@@ -89,5 +106,36 @@ export function create(data) {
       console.log(error);
       reject(error);
     }
+  });
+}
+
+/*LIBROS GET */
+export function getAll() {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.get(
+        `${process.env.REACT_APP_API_DOMAIN}/book`,
+        { withCredentials: true }
+      );
+      const result = await response.data;
+      resolve(result);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+}
+
+/*LIBRO GET BY ID */
+export function getLibrobyId(id) {
+  return new Promise(async (resolve, reject) => {
+      try {
+          const response = await axios.get(`${process.env.REACT_APP_API_DOMAIN}/book/${id}`, { withCredentials: true });
+          const result = await response.data;
+          resolve(result);
+      } catch (error) {
+          console.log(error);
+          reject(error);
+      }
   });
 }

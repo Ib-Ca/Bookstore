@@ -12,6 +12,7 @@ import Link from "next/link";
 import { useCookies } from "next-client-cookies";
 import { useEffect } from "react";
 import { useState } from "react";
+import { logout } from "@/app/api/root";
 
 const TopNav = () => {
   const router = useRouter();
@@ -38,7 +39,16 @@ const TopNav = () => {
     router.push(route);
   };
 
-  const handleLogout = () => {};
+  const handleLogout = async() => {
+    try {
+        const result= await logout
+        cookies.remove('info')
+        console.log("fuera");
+        window.location.href = "/"
+    } catch (error) {
+        
+    }
+  };
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">

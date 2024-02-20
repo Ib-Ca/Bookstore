@@ -208,7 +208,7 @@ export default function BookForm() {
                   variant="contained"
                   sx={{ mt: 3, mb: 2 }}
                 >
-                  Crear Libro
+                 Enviar
                 </Button>
               </Box>
             </Box>
