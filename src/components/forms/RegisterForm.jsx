@@ -15,7 +15,6 @@ import { register } from "@/app/api/root";
 import { useRouter } from "next/navigation";
 
 /*FALTAN
-REDIRECCIONES
 ERRORES
 */
 

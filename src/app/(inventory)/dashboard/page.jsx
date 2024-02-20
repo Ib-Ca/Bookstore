@@ -4,7 +4,7 @@ import { useCookies } from "next-client-cookies";
 import { useEffect, useState } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import { Grid, Box, Button, ButtonGroup, Avatar } from "@mui/material";
-import { getAll } from "@/app/api/root";
+import { deleter, getAll } from "@/app/api/root";
 import BookForm from "@/components/forms/BookForm";
 import Link from "next/link";
 const Inventario = () => {
@@ -32,8 +32,14 @@ const Inventario = () => {
   }, []);
 
 
-  const handleDelete = (aux) => {
+  const handleDelete = async(aux) => {
     console.log(aux.id);
+    try {
+     const result=await deleter(aux.id)
+     window.location.reload()
+    } catch (error) {
+      console.log(error);
+    }
   };
   const columns = [
     { field: "_id", headerName: "ID", width: 1 },
