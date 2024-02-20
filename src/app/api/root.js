@@ -73,3 +73,21 @@ export function passwordReset(data) {
     }
   });
 }
+
+/*LIBROS AÑADIR */
+export function create(data) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const response = await axios.post(
+        `${process.env.REACT_APP_API_DOMAIN}/book`,
+        data,
+        { withCredentials: true }
+      );
+      const result = await response.data;
+      resolve(result);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+}

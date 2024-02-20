@@ -13,6 +13,8 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import Link from "next/link";
 import { login } from "@/app/api/root";
+import { useRouter } from "next/navigation";
+import { useCookies } from "next-client-cookies";
 
 const Copyright = (props) => {
   return (
@@ -33,6 +35,8 @@ const Copyright = (props) => {
 };
 
 const LoginForm = () => {
+  const cookies = useCookies();
+  const router = useRouter();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -42,7 +46,14 @@ const LoginForm = () => {
     };
     try {
       const result = await login(data);
-      console.log(result);
+    //console.log(result);
+      const userCookieData = {
+        token: result.token,
+        role: result.user.role,
+        login: true,
+      };
+      cookies.set("info", JSON.stringify(userCookieData));//creación de cookie en cliente
+      window.location.href = "/" //PREGUNTAR COMO HACER SIN RECARGAR
     } catch (error) {
       console.log(error);
     }

@@ -12,13 +12,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { register } from "@/app/api/root";
-
+import { useRouter } from "next/navigation";
 
 /*FALTAN
 REDIRECCIONES
 ERRORES
 */
-
 
 const Copyright = (props) => {
   return (
@@ -39,6 +38,7 @@ const Copyright = (props) => {
 };
 
 const RegisterForm = () => {
+  const router = useRouter();
   const handleSubmit = async (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
@@ -51,7 +51,8 @@ const RegisterForm = () => {
     };
     try {
       const result = await register(data);
-      console.log(result);
+      //console.log(result);
+      router.push("/login");
     } catch (error) {
       console.log(error);
     }
