@@ -6,6 +6,7 @@ import { DataGrid } from "@mui/x-data-grid";
 import { Grid, Box, Button, ButtonGroup, Avatar } from "@mui/material";
 import { deleter, getAll } from "@/app/api/root";
 import BookForm from "@/components/forms/BookForm";
+import { useCookies } from 'next-client-cookies';
 import Link from "next/link";
 const Inventario = () => {
   const cookies = useCookies();

@@ -53,7 +53,8 @@ const LoginForm = () => {
         login: true,
       };
       cookies.set("info", JSON.stringify(userCookieData));//creación de cookie en cliente
-      window.location.href = "/" //PREGUNTAR COMO HACER SIN RECARGAR
+     // window.location.href = "/" //PREGUNTAR COMO HACER SIN RECARGAR
+      router.push("/")
     } catch (error) {
       console.log(error);
     }
